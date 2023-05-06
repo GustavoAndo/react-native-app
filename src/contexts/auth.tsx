@@ -23,8 +23,9 @@ export const AuthProvider = ({children}) => {
 
             if (storageUser && storageToken) {
                 setUser(JSON.parse(storageUser));
-                setLoading(false);
             }
+
+            setLoading(false);
         })()
     }, [])
 

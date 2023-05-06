@@ -7,6 +7,7 @@ export type propsNavigationStack = {
     PartyList: undefined,
     NewParty: undefined,
     Home: undefined,
+    PartyDetails: undefined
 }
 
 export type propsStack = NativeStackNavigationProp<propsNavigationStack>

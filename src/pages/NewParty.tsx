@@ -12,14 +12,16 @@ export const NewParty = () => {
   const [budget, setBudget] = useState('');
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
-  const [file, setFile] = useState();
+  const [file, setFile] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
 
   async function cadastrarFesta() {
     try {
         const data = new FormData();
 
-        data.append('file', file);
+        file.forEach((f) => {
+          data.append('file', f);
+        });
 
         data.append('title', title);
         data.append('author', author);
@@ -27,7 +29,6 @@ export const NewParty = () => {
         data.append('description', description);
 
         const response = await api.post('/party', data, {headers: {'Content-Type': 'multipart/form-data'}});
-        console.log(response.data)
 
         navigation.navigate('PartyList');
     } catch (response) {
@@ -37,8 +38,8 @@ export const NewParty = () => {
 
   async function selecionarArquivo() {
     try {
-        const doc = await DocumentPicker.pick();
-        setFile(doc);
+        const data = await DocumentPicker.pick({ allowMultiSelection: true });
+        setFile(data);
     } catch (err){
         if (DocumentPicker.isCancel(err)) {
             console.log('Usuario cancelou o upload', err);
@@ -64,7 +65,9 @@ export const NewParty = () => {
         <Text>Imagem: </Text>
         <View style={styles.button}>
             <Button title="Selecione um arquivo" onPress={selecionarArquivo}/>
-            {file && <Text style={{textAlign: 'center'}}>{file.name}</Text>}
+            {file && file.map(f => (
+              <Text key={f.uri} style={{textAlign: 'center'}}>{f.name}</Text>
+            ))}
         </View>
         <Button title="Cadastrar" onPress={cadastrarFesta}/>
     </View>

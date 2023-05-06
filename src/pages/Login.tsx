@@ -1,13 +1,9 @@
 import React, { useState} from 'react';
 import {View, Text, TextInput, StyleSheet, Button} from 'react-native';
-import { propsStack } from '../routes/Models';
-import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/auth';
 
 export const Login = () => {
   const { signIn } = useAuth();
-
-  const navigation = useNavigation<propsStack>()
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

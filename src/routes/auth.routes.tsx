@@ -5,6 +5,7 @@ import { propsNavigationStack } from './Models'
 import { PartyList } from '../pages/PartyList'
 import { Home } from '../pages/Home'
 import { NewParty } from '../pages/NewParty'
+import { PartyDetails } from '../pages/PartyDetails'
 
 const { Screen, Navigator } = createNativeStackNavigator<propsNavigationStack>()
 
@@ -30,6 +31,10 @@ export function AuthRoutes() {
             <Screen
                 name="NewParty"
                 component={NewParty}
+            />
+            <Screen
+                name="PartyDetails"
+                component={PartyDetails}
             />
         </Navigator>
     )
